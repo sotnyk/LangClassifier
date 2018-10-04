@@ -5,6 +5,7 @@ using Microsoft.ML.Runtime.Learners;
 using Microsoft.ML.Trainers;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Learner
 {
@@ -64,11 +65,19 @@ namespace Learner
             }
         }
 
+        private static string[] _ignoredMessages = new[]
+        {
+            "Channel started", "Channel disposed",
+        };
+
         private static void ConsoleLogger(IMessageSource source, ChannelMessage message)
         {
+            
             try
             {
-                Console.WriteLine($"{source.ShortName}: {message.Message} ({message.Kind})");
+                if (_ignoredMessages.Any(m => m.Equals(message.Message, StringComparison.InvariantCultureIgnoreCase)))
+                    return;
+                Console.WriteLine($">>{source.ShortName}: {message.Message} ({message.Kind})");
             }
             catch { }
         }

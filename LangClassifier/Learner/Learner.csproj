@@ -31,8 +31,4 @@
     <PackageReference Include="Microsoft.ML" Version="0.6.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LangClassifierCommon\LangClassifierCommon.csproj" />
-  </ItemGroup>
-
 </Project>
